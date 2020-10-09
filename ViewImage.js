@@ -7,8 +7,7 @@ import {
   ImageBackground,
 } from "react-native";
 
-const bgImage = require("./assets/background.jpg");
-const logoRed = require("./assets/logo-red.png");
+const chairImage = require("./assets/chair.jpg");
 
 export default function App() {
   return (
