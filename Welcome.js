@@ -14,7 +14,7 @@ export default function App() {
   return (
     <View style={styles.container}>
     <ImageBackground source={bgImage} style={styles.bgImage}>
-      <View style={{ flex: 8, justifyContent: "center", alignItems: "center" }}>
+      <View style={{ flex: 9, justifyContent: "center", alignItems: "center" }}>
         <Image source={ logoRed } style={styles.logoImage} />
       </View>
       <View style={{ flex: 1, backgroundColor: "salmon" }}></View>

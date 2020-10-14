@@ -1,44 +1,17 @@
-import React from "react";
-import {
-  Text,
-  StyleSheet,
-  Image,
-  View,
-  ImageBackground,
-} from "react-native";
+import React, { useState } from "react";
+import ListingEditScreen from "./app/screens/ListingEditScreen";
+import LoginScreen from "./app/screens/LoginScreen";
+import RegisterScreen from "./app/screens/RegisterScreen";
+import WelcomeScreen from "./app/screens/WelcomeScreen";
+import MessagesScreen from './app/screens/MessagesScreen';
 
-const bgImage = require("./assets/background.jpg");
-const logoRed = require("./assets/logo-red.png");
 
 export default function App() {
   return (
-    <View style={styles.container}>
-    <ImageBackground source={bgImage} style={styles.bgImage}>
-      <View style={{ flex: 8, justifyContent: "center", alignItems: "center" }}>
-        <Image source={ logoRed } style={styles.logoImage} />
-      </View>
-      <View style={{ flex: 1, backgroundColor: "salmon" }}></View>
-      <View style={{ flex: 1, backgroundColor: "paleturquoise" }}></View>
-    </ImageBackground>
-  </View>
+    <WelcomeScreen />
+    // <LoginScreen />
+    // <RegisterScreen />
+    // <ListingEditScreen />
+    // <MessagesScreen />
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column"
-  },
-  bgImage: {
-    flex: 1,
-    resizeMode: "cover",
-    justifyContent: "center",
-    zIndex: 1
-  },
-  logoImage: {
-    justifyContent: "center",
-    width: 80,
-    height: 80,
-    bottom: 130
-  }
-});
+} 
