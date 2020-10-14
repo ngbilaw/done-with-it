@@ -1,51 +1,51 @@
-import React from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import React from "react";
+import { View, Image, StyleSheet } from "react-native";
 
-import AppText from '../components/AppText';
-import ListItem from '../components/ListItem';
-import colors from '../config/colors';
+import colors from "../config/colors";
+import ListItem from "../components/lists/ListItem";
+import AppText from "../components/AppText";
 
-function ListingDetailsScreen(props) {
-  const {title, subTitle, image, sellerName, sellerListingsCount, sellerImage} = props;
+function ListingDetailsScreen({ route }) {
+  const listing = route.params;
   return (
-    <View style={styles.container}>
-      <Image source={image} style={styles.topImage}></Image>
-      <View style={styles.listingDetails}>
-        <AppText style={styles.listingTitle}>{ title }</AppText>
-        <AppText style={styles.listingSubTitle}>{ subTitle }</AppText>
-      </View>
-      <View style={styles.userContainer}>
-        <ListItem title={sellerName} subTitle={sellerListingsCount} image={sellerImage} />
+    <View>
+      <Image style={styles.image} source={{ uri: listing.images[0].url}} />
+      <View style={styles.detailsContainer}>
+        <AppText style={styles.title}>{listing.title}</AppText>
+        <AppText style={styles.price}>${listing.price}</AppText>
+        <View style={styles.userContainer}>
+          <ListItem
+            image={require("../assets/mosh.jpg")}
+            title="Mosh Hamedani"
+            subTitle="5 Listings"
+          />
+        </View>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    
+  detailsContainer: {
+    padding: 20,
   },
-  listingDetails: {
-    paddingHorizontal: 15,
-    marginVertical: 15,
+  image: {
+    width: "100%",
+    height: 300,
   },
-  listingTitle: {
-    fontSize: 18,
-    fontWeight: "600",
-    marginBottom: 5,
-  },
-  listingSubTitle: {
-    fontSize: 16,
-    fontWeight: "600",
+  price: {
     color: colors.secondary,
+    fontWeight: "bold",
+    fontSize: 20,
+    marginVertical: 10,
   },
-  topImage: {
-    height: 250,
-    width: null,
+  title: {
+    fontSize: 24,
+    fontWeight: "500",
   },
   userContainer: {
-    marginVertical: 20,
+    marginVertical: 40,
   },
-})
+});
 
 export default ListingDetailsScreen;
