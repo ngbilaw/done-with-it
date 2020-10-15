@@ -1,9 +1,10 @@
 import { create } from 'apisauce';
 import cache from '../utility/cache';
 import authStorage from '../auth/storage';
+import settings from '../config/settings';
 
 const apiClient = create({
-  baseURL: 'https://done-with-it-api.herokuapp.com/api'
+  baseURL: settings.apiUrl,
 });
 
 apiClient.addAsyncRequestTransform(async (request) => {

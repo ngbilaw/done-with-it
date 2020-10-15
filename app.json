@@ -22,6 +22,22 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": "A market place for selling stuff you don't need anymore"
+    "description": "A market place for selling stuff you don't need anymore",
+    "notification": {
+      "iosDisplayInForeground": true
+    },
+    "extra": {
+      "bugsnag": {
+        "apiKey": "5a9a1480280e32c51844cf05d7ae8d2c"
+      }
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "@bugsnag/expo/hooks/post-publish.js",
+          "config": {}
+        }
+      ]
+    }
   }
 }
