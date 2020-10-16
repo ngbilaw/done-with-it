@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import * as Yup from 'yup';
 
@@ -13,7 +13,9 @@ import CategoryPickerItem from '../components/CategoryPickerItem';
 import FormImagePicker from '../components/forms/FormImagePicker';
 import useLocation from '../hooks/useLocation';
 import listingsApi from '../api/listings';
+import categoriesApi from '../api/categories';
 import UploadScreen from './UploadScreen';
+import useApi from '../hooks/useApi';
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
@@ -23,66 +25,15 @@ const validationSchema = Yup.object().shape({
   images: Yup.array().min(1, "Please select at least one image."),
 });
 
-const categories = [
-  {
-    label: 'Furniture',
-    value: 1,
-    backgroundColor: 'red',
-    icon: 'apps',
-  },
-  {
-    label: 'Clothing',
-    value: 2,
-    backgroundColor: 'green',
-    icon: 'email',
-  },
-  {
-    label: 'Electronics',
-    value: 3,
-    backgroundColor: 'blue',
-    icon: 'lock',
-  },
-  {
-    label: 'Cars',
-    value: 4,
-    backgroundColor: 'salmon',
-    icon: 'apps',
-  },
-  {
-    label: 'Cameras',
-    value: 5,
-    backgroundColor: 'dodgerblue',
-    icon: 'email',
-  },
-  {
-    label: 'Sports',
-    value: 6,
-    backgroundColor: 'tomato',
-    icon: 'lock',
-  },
-  {
-    label: 'Books',
-    value: 7,
-    backgroundColor: 'pink',
-    icon: 'apps',
-  },
-  {
-    label: 'Movies & Music',
-    value: 8,
-    backgroundColor: 'yellow',
-    icon: 'email',
-  },
-  {
-    label: 'Others',
-    value: 9,
-    backgroundColor: 'gray',
-    icon: 'lock',
-  },
-];
-
 function ListingEditScreen() {
   const [uploadVisible, setUploadVisible] = useState(false);
   const [progress, setProgress] = useState(0);
+
+  const getCategoriesApi = useApi(categoriesApi.getCategories);
+
+  useEffect(() => {
+    getCategoriesApi.request();
+  }, []);
 
   const location = useLocation();
 
@@ -134,7 +85,7 @@ function ListingEditScreen() {
           width={120}
         />
         <AppFormPicker
-          items={categories}
+          items={getCategoriesApi.data}
           name="category"
           numberOfColumns={3}
           PickerItemComponent={CategoryPickerItem}

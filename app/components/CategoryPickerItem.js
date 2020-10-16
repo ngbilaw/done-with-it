@@ -14,7 +14,7 @@ function CategoryPickerItem({ item, onPress }) {
           size={80}
         />
       </TouchableOpacity>
-      <Text style={styles.label}>{item.label}</Text>
+      <Text style={styles.label}>{item.name}</Text>
     </View>
   );
 }
