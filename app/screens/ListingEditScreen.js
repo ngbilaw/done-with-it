@@ -75,6 +75,7 @@ function ListingEditScreen() {
           name="title"
           placeholder="Title"
           textContentType="none"
+          icon='label'
         />
         <AppFormField
           keyboardType="numeric"
@@ -83,6 +84,7 @@ function ListingEditScreen() {
           placeholder="Price"
           textContentType="none"
           width={120}
+          icon='price'
         />
         <AppFormPicker
           items={getCategoriesApi.data}
@@ -91,6 +93,7 @@ function ListingEditScreen() {
           PickerItemComponent={CategoryPickerItem}
           placeholder="Category"
           width="50%"
+          icon="grid"
         />
         <AppFormField
           autocorrect={false}
@@ -98,6 +101,7 @@ function ListingEditScreen() {
           placeholder="Description"
           textContentType="none"
           numberOfLines={3}
+          icon="text"
         />
         <SubmitButton title="post" />
       </AppForm>

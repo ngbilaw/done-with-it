@@ -6,6 +6,7 @@ import ErrorMessage from './ErrorMessage';
 import { number } from 'yup';
 
 function AppFormPicker({ 
+  icon,
   items, 
   name, 
   numberOfColumns,
@@ -22,6 +23,7 @@ function AppFormPicker({
   return (
     <>
       <AppPicker
+        icon={icon}
         items={items}
         numberOfColumns={numberOfColumns}
         onSelectItem={(item) => setFieldValue(name, item)}
