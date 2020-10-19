@@ -7,10 +7,12 @@ const settings = {
     IOS_CLIENT_ID: '781063018754-ssu55g115v4j7i51qeafsoskfssp1g3j.apps.googleusercontent.com'
   },
   staging: {
-    apiUrl: 'https://done-with-it-api.herokuapp.com/api'
+    apiUrl: 'https://done-with-it-api.herokuapp.com/api',
+    IOS_CLIENT_ID: '781063018754-ssu55g115v4j7i51qeafsoskfssp1g3j.apps.googleusercontent.com'
   },
   prod: {
-    apiUrl: 'https://done-with-it-api.herokuapp.com/api'
+    apiUrl: 'https://done-with-it-api.herokuapp.com/api',
+    IOS_CLIENT_ID: '781063018754-ssu55g115v4j7i51qeafsoskfssp1g3j.apps.googleusercontent.com'
   },
 }
 
