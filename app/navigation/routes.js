@@ -8,5 +8,6 @@ export default Object.freeze({
   REGISTER: 'Register',
   WELCOME: 'Welcome',
   MY_LISTINGS: 'MyListings',
+  GOOGLE_LOGIN: "GoogleLogin",
 });
 

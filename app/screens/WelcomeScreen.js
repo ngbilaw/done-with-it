@@ -31,6 +31,11 @@ export default function WelcomeScreen({ navigation }) {
         title="Register"
         onPress={() => navigation.navigate(routes.REGISTER)}
       />
+      <AppButton 
+        color="primary"
+        title="Login with Google"
+        onPress={() => navigation.navigate(routes.GOOGLE_LOGIN)}
+      />
     </ImageBackground>
   </View>
   );

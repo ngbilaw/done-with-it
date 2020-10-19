@@ -12,6 +12,7 @@ import AppButton from '../components/AppButton';
 import useApi from '../hooks/useApi';
 
 function ListingsScreen({ navigation }) {
+  const [ refreshing, setRefresing ] = useState(false);
   const getListingsApi = useApi(listingsApi.getListings);
   
   useEffect(() => {
@@ -27,7 +28,7 @@ function ListingsScreen({ navigation }) {
           <AppButton title="Retry" onPress={loadListings}/>
         </>}
         <FlatList 
-          data={getListingsApi.data}
+          data={getListingsApi.data.sort((a, b) => (a.id > b.id) ? 1 : -1)}
           keyExtractor={listing => listing.id.toString()}
           renderItem={
             ({ item }) => 
@@ -39,6 +40,10 @@ function ListingsScreen({ navigation }) {
                 thumbnailUrl={item.images[0].thumbnailUrl}
               />
           }
+          refreshing={refreshing}
+          onRefresh={() => {
+            getListingsApi.request();
+          }}
         />
       </Screen>
     </>

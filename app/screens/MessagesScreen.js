@@ -1,33 +1,66 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, View, StyleSheet } from 'react-native';
 
 import Screen from '../components/Screen';
 import { ListItem, ListItemDeleteAction, ListItemSeparator } from '../components/lists';
+import messagesApi from '../api/messages';
+import useApi from '../hooks/useApi';
 
 const initialMessages = [
   {
-    id: 1,
-    title: 'T1',
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-    image: require('../assets/mosh.jpg')
+    "id": 1,
+    "listingId": 1,
+    "dateTime": 1586044521956,
+    "content": "Is this still available?",
+    "fromUser": {
+        "id": 2,
+        "name": "John"
+    },
+    "toUser": {
+        "id": 1,
+        "name": "Mosh"
+    }
   },
   {
-    id: 2,
-    title: 'T2',
-    description: 'D2',
-    image: require('../assets/mosh.jpg')
+      "id": 2,
+      "listingId": 1,
+      "dateTime": 1586044521956,
+      "content": "I'm interested in this item. Do you provide free delivery?",
+      "fromUser": {
+          "id": 2,
+          "name": "John"
+      },
+      "toUser": {
+          "id": 1,
+          "name": "Mosh"
+      }
   },
   {
-    id: 3,
-    title: 'T3',
-    description: 'D3',
-    image: require('../assets/mosh.jpg')
+      "id": 3,
+      "listingId": 1,
+      "dateTime": 1586044521956,
+      "content": "Please give me a call and we'll arrange this for you.",
+      "fromUser": {
+          "id": 2,
+          "name": "John"
+      },
+      "toUser": {
+          "id": 1,
+          "name": "Mosh"
+      }
   },
 ]
 
 function MessagesScreen() {
   const [messages, setMessages] = useState(initialMessages);
   const [refreshing, setRefreshing] = useState(false);
+
+  const getMessagesApi = useApi(messagesApi.getMessages);
+
+  useEffect(() => {
+    getMessagesApi.request();
+  }, []);
+
   const handleDelete = message => {
     // Delete the message from messages
     const newMessages = messages.filter(m => m.id !== message.id);
@@ -36,6 +69,7 @@ function MessagesScreen() {
     // Call the server
   }
 
+  
   return (
     <Screen>
       <FlatList 
@@ -44,9 +78,9 @@ function MessagesScreen() {
         renderItem={
           ({ item }) =>
             <ListItem
-              title={item.title}
-              subTitle={item.description}
-              image={item.image}
+              title={item.fromUser.name}
+              subTitle={item.content}
+              image={require('../assets/mosh.jpg')}
               onPress={() => console.log('Message selected', item)}
               renderRightActions={() =>
                 <ListItemDeleteAction
@@ -61,10 +95,18 @@ function MessagesScreen() {
         onRefresh={() => {
           setMessages([
             {
-              id: 2,
-              title: 'T2',
-              description: 'D2',
-              image: require('../assets/mosh.jpg')
+              "id": 8,
+              "listingId": 101,
+              "dateTime": 1603033351034,
+              "content": "Wow",
+              "fromUser": {
+                  "id": 3,
+                  "name": "Nicole"
+              },
+              "toUser": {
+                  "id": 1,
+                  "name": "Mosh"
+              }
             },
           ])
         }}

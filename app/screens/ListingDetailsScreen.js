@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Dimensions,
   View,
@@ -15,9 +15,17 @@ import colors from "../config/colors";
 import ContactSellerForm from "../components/ContactSellerForm";
 import ListItem from "../components/lists/ListItem";
 import AppText from "../components/AppText";
+import usersApi from '../api/users';
+import useApi from '../hooks/useApi';
 
 function ListingDetailsScreen({ route }) {
   const listing = route.params;
+
+  const getUserApi = useApi(usersApi.getUser);
+
+  useEffect(() => {
+    getUserApi.request(listing.userId);
+  }, []);
 
   return (
     <ScrollView>
@@ -37,8 +45,8 @@ function ListingDetailsScreen({ route }) {
           <View style={styles.userContainer}>
             <ListItem
               image={require("../assets/mosh.jpg")}
-              title="Mosh Hamedani"
-              subTitle="5 Listings"
+              title={getUserApi.data ? getUserApi.data.name : "Mosh"}
+              subTitle={getUserApi.data ? getUserApi.data.listings + (getUserApi.data.listings > 1 ? " Listings" : " Listing") : "4 Listings" }
             />
           </View>
           <ContactSellerForm listing={listing} />
