@@ -8,8 +8,8 @@ import {
   Keyboard,
   ScrollView,
 } from "react-native";
-import { Image } from "react-native-expo-image-cache";
 import MapView, { Marker } from "react-native-maps";
+import Gallery from 'react-native-image-gallery';
 
 import colors from "../config/colors";
 import ContactSellerForm from "../components/ContactSellerForm";
@@ -17,14 +17,32 @@ import ListItem from "../components/lists/ListItem";
 import AppText from "../components/AppText";
 import usersApi from '../api/users';
 import useApi from '../hooks/useApi';
+import GalleryImage from "../components/GalleryImage";
 
 function ListingDetailsScreen({ route }) {
   const listing = route.params;
+  const [ galleryImages, setGalleryImages ] = useState();
 
   const getUserApi = useApi(usersApi.getUser);
 
+  const buildGalleryImages = (images) => {
+    let galleryImages = [];
+    images.forEach(addGalleryImage);
+  
+    function addGalleryImage(image) {
+      const galleryImage = {
+        source: {
+          uri: image.url
+        }
+      };
+      galleryImages.push(galleryImage);
+    };
+    setGalleryImages(galleryImages);
+  };
+
   useEffect(() => {
     getUserApi.request(listing.userId);
+    buildGalleryImages(listing.images);
   }, []);
 
   return (
@@ -33,11 +51,18 @@ function ListingDetailsScreen({ route }) {
         behavior="position"
         keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 100}
       >
-        <Image
+        {/* <Image
           style={styles.image}
           preview={{ uri: listing.images[0].thumbnailUrl }}
           tint="light"
           uri={listing.images[0].url}
+        /> */}
+        <Gallery
+          style={styles.image}
+          initialPage="1"
+          //initial image to show
+          images={galleryImages}
+          imageComponent={(image) => <GalleryImage image={image}/>}
         />
         <View style={styles.detailsContainer}>
           <AppText style={styles.title}>{listing.title}</AppText>
@@ -45,8 +70,8 @@ function ListingDetailsScreen({ route }) {
           <View style={styles.userContainer}>
             <ListItem
               image={require("../assets/mosh.jpg")}
-              title={getUserApi.data ? getUserApi.data.name : "Mosh"}
-              subTitle={getUserApi.data ? getUserApi.data.listings + (getUserApi.data.listings > 1 ? " Listings" : " Listing") : "4 Listings" }
+              title={getUserApi.data?.name}
+              subTitle={getUserApi.data?.listings + " Listings"}
             />
           </View>
           <ContactSellerForm listing={listing} />
