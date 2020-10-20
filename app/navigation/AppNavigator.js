@@ -8,11 +8,12 @@ import ListingEditScreen from '../screens/ListingEditScreen';
 import NewListingButton from './NewListingButton';
 import routes from './routes';
 import useNotifications from '../hooks/useNotifications';
+import navigation from '../navigation/rootNavigation';
 
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
-  useNotifications();
+  useNotifications(() => navigation.navigate(routes.ACCOUNT));
 
   return (
     <Tab.Navigator>
