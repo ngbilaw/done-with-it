@@ -21,21 +21,23 @@ export default function WelcomeScreen({ navigation }) {
         <Image source={ logoRed } style={styles.logoImage} />
         <Text style={styles.logoSubtext} >Sell What You Don't Need</Text>
       </View>
-      <AppButton
-        color="primary" 
-        title="Login" 
-        onPress={() => navigation.navigate(routes.LOGIN)}
-      />
-      <AppButton 
-        color="secondary"
-        title="Register"
-        onPress={() => navigation.navigate(routes.REGISTER)}
-      />
-      <AppButton 
-        color="primary"
-        title="Login with Google"
-        onPress={() => navigation.navigate(routes.GOOGLE_LOGIN)}
-      />
+      <View style={styles.buttonContainer}>
+        <AppButton
+          color="primary" 
+          title="Login" 
+          onPress={() => navigation.navigate(routes.LOGIN)}
+        />
+        <AppButton 
+          color="secondary"
+          title="Register"
+          onPress={() => navigation.navigate(routes.REGISTER)}
+        />
+        <AppButton 
+          color="primary"
+          title="Login with Google"
+          onPress={() => navigation.navigate(routes.GOOGLE_LOGIN)}
+        />
+      </View>
     </ImageBackground>
   </View>
   );
@@ -47,6 +49,9 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "center",
     zIndex: 1
+  },
+  buttonContainer : {
+    marginBottom: 20,
   },
   container: {
     flex: 1,

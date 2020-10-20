@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
   secondary: {
     backgroundColor: colors.secondary,
     marginTop: 5,
-    marginBottom: 20,
   }
 })
 
