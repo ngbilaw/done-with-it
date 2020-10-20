@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Button } from 'react-native';
+import { StyleSheet } from 'react-native';
 import * as Google from 'expo-google-app-auth'
 import settings from '../config/settings';
 import usersApi from "../api/users";
