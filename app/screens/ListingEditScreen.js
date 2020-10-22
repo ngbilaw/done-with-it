@@ -16,6 +16,7 @@ import listingsApi from '../api/listings';
 import categoriesApi from '../api/categories';
 import UploadScreen from './UploadScreen';
 import useApi from '../hooks/useApi';
+import routes from '../navigation/routes';
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
@@ -25,7 +26,7 @@ const validationSchema = Yup.object().shape({
   images: Yup.array().min(1, "Please select at least one image."),
 });
 
-function ListingEditScreen() {
+function ListingEditScreen({ navigation }) {
   const [uploadVisible, setUploadVisible] = useState(false);
   const [progress, setProgress] = useState(0);
 
@@ -51,6 +52,7 @@ function ListingEditScreen() {
     }
     
     resetForm();
+    navigation.navigate(routes.ACCOUNT, { screen: routes.MY_LISTINGS});
   }
 
   return (
