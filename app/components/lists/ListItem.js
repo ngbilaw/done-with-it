@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     flexDirection: 'row',
-    padding: 15,
+    padding: 12,
     backgroundColor: defaultStyles.colors.white,
   },
   detailsContainer: {
