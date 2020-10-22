@@ -20,7 +20,7 @@ const AuthNavigator = () => (
     />
     <Stack.Screen name="Login" component={LoginScreen} />
     <Stack.Screen name="Register" component={RegisterScreen} />
-    <Stack.Screen name="GoogleLogin" component={GoogleLoginScreen} />
+    <Stack.Screen name="Google Login" component={GoogleLoginScreen} />
   </Stack.Navigator>
 )
 export default AuthNavigator;
