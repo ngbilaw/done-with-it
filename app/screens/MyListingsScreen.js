@@ -18,7 +18,7 @@ function MyListingsScreen({ navigation }) {
   
   useEffect(() => {
     getMyListingsApi.request();
-  }, [JSON.stringify(getMyListingsApi.data), ]);
+  }, []);
 
   return (
     <>
