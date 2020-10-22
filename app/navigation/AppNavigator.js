@@ -13,7 +13,15 @@ import navigation from '../navigation/rootNavigation';
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
-  useNotifications(() => navigation.navigate(routes.ACCOUNT));
+
+  const handleNotification = ({ data }) => {
+    if (data.route) 
+      navigation.navigate(data.route)
+    else
+      navigation.navigate(routes.ACCOUNT)
+  };
+
+  useNotifications(handleNotification);
 
   return (
     <Tab.Navigator>
