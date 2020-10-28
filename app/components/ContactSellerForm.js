@@ -1,6 +1,6 @@
 import React from "react";
 import { Alert, Keyboard } from "react-native";
-import { Notifications } from "expo";
+import * as Notifications from 'expo-notifications';
 import * as Yup from "yup";
 
 import { AppForm as Form, AppFormField as FormField, SubmitButton } from "./forms";

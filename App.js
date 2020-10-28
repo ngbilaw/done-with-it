@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { AppLoading } from 'expo';
-import { Button } from 'react-native';
+import * as SplashScreen from 'expo-splash-screen';
 import logger from './app/utility/logger';
 
 import AuthContext from './app/auth/context';
@@ -13,7 +12,7 @@ import authStorage from "./app/auth/storage";
 import { navigationRef } from './app/navigation/rootNavigation';
 import Screen from "./app/components/Screen";
 
-import { Notifications } from 'expo';
+import * as Notifications from 'expo-notifications';
 
 logger.start();
 
@@ -34,9 +33,32 @@ export default function App() {
       time: new Date().getTime() + 2000
     });
   };
+  
+  useEffect(() => {
+    
+    // Stop the Splash Screen from being hidden.
+    const showSplashScreen = async () => {
+      await SplashScreen.preventAutoHideAsync();
+    }
+    showSplashScreen();
+    // You can do additional data fetching here.
+    // I have a function that fetches my user from Firebase
+    // but I have left it out because it is kind of irrelevant
+    // in this demo.
+    restoreUser();
+    setIsReady(true);
+  }, []);
 
-  if (!isReady)
-    return <AppLoading  startAsync={restoreUser} onFinish={() => setIsReady(true)} />;
+  useEffect(() => {
+    // Once our data is ready, hide the Splash Screen
+    const hideSplashScreen = async () => {
+      await SplashScreen.hideAsync();
+    }
+
+    if (isReady) hideSplashScreen();
+  }, [isReady])
+  
+  if (!isReady) return null;
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
